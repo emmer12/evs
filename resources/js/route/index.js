@@ -1,0 +1,145 @@
+import AccountCreated from '../components/pages/AccountCreated.vue';
+import AccountActivated from '../components/pages/AccountActivated.vue';
+import AboutPage from '../components/pages/AboutPage.vue';
+import ContactPage from '../components/pages/ContactPage.vue';
+import BlogPage from '../components/pages/BlogPage.vue';
+import BlogPageSingle from '../components/pages/BlogPageSingle.vue';
+import HomePage from '../components/pages/HomePage.vue';
+import GalleryPage from '../components/pages/GalleryPage.vue';
+import NewPost from '../components/partials/NewPost.vue';
+import EditPost from '../components/partials/EditPost.vue';
+import ShowPost from '../components/partials/ShowPost.vue';
+import UploadPage from '../components/partials/UploadPage.vue';
+import AdminLoginPage from '../components/auth/AdminLoginPage.vue';
+import PageNotFound from '../components/pages/PageNotFound.vue';
+import DashboardPage from '../components/auth/DashboardPage.vue';
+import Logout from '../components/auth/Logout.vue';
+
+export const routes = [
+    {
+        path: '/',
+        name: 'home',
+        component: HomePage,
+        meta: {
+            // progress:{
+            //     func:[
+            //         {call:'color',modifier:'temp',argument:'#ffb000'},
+            //         {call:'fail',modifier:'temp',argument:'red'},
+            //         {call:'location',modifier:'temp',argument:'top'},
+            //         // {call:'color',modifier:'temp',argument:'#ffb000'},
+            //     ]
+            //}
+        }
+    },
+    {
+        path: '/about',
+        name: 'about',
+        component: AboutPage,
+        meta: {
+            title: "::About::",
+        }
+    },
+    {
+        path: '/contact',
+        name: 'contact',
+        component: ContactPage,
+        meta: {
+            title: "::Contact Us::",
+        }
+    },
+    {
+        path: '/blog',
+        name: 'blog',
+        component: BlogPage
+    },
+    {
+        path: '/blog/:slug',
+        name: 'blog-single',
+        component: BlogPageSingle
+    },
+    {
+        path: '/upload-example',
+        name: 'uploade',
+        component: UploadPage
+    },
+    {
+        path: '/gallery',
+        name: 'gallery',
+        component: GalleryPage
+    },
+    {
+        path: '/admin/exclusive',
+        name: 'admin',
+        component: AdminLoginPage,
+        meta: {
+            requiresVisitor: true,
+        }
+    },
+    {
+        path: '/dashboard',
+        name: 'dashboard',
+        component: DashboardPage,
+        meta: {
+            requiresAuth: true,
+        }
+    },
+
+    {
+        path: '/dashboard/add',
+        name: 'add',
+        component: NewPost,
+        meta: {
+            requiresAuth: true,
+        }
+    },
+
+    {
+        path: '/dashboard/:id/edit',
+        name: 'edit',
+        component: EditPost,
+        meta: {
+            requiresAuth: true,
+        }
+    },
+
+    {
+        path: '/dashboard/show/:id',
+        name: 'show',
+        component: ShowPost,
+        meta: {
+            requiresAuth: true,
+        }
+    },
+    {
+        path: '/logout',
+        name: 'logout',
+        component: Logout,
+        meta: {
+            requiresAuth: true,
+        }
+    },
+    // { 
+    //     path: '/about',
+    //     name: 'about',
+    //     component:About,
+    //     meta:{
+    //         requiresAuth:false,
+    //     }
+    // },
+    {
+        path: '/account/created/success',
+        name: 'account-success',
+        component: AccountCreated
+    },
+    {
+        path: '/account/activated/success',
+        name: 'activated-success',
+        component: AccountActivated
+    },
+
+    {
+        path: '*',
+        name: '404',
+        component: PageNotFound
+    },
+];
