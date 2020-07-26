@@ -20,7 +20,7 @@ export default {
     evsFeeds(state){
         return state.evsFeed
     },
-    feedHome(state){
-        return state.evsFeed
+    category(state){
+        return state.category
     }
 }

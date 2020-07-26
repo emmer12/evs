@@ -172,13 +172,44 @@ export default {
             })  
         },
         getCategory(context){
-            axios.get('/category')
+            axios.defaults.headers.common['Authorization']="Bearer " + context.state.token
+            return new Promise((resolve,reject)=>{
+                axios.get('/category')
+                .then(response=>{
+                    context.commit("getCategory",response.data.data)
+                    resolve()
+                })
+                .catch(err=>{
+                    reject(err)
+                    console.log(err);
+                })  
+            })
+        },
+        saveCategory(context,data){
+            axios.defaults.headers.common['Authorization']="Bearer " + context.state.token
+            return new Promise((resolve,reject)=>{                
+                axios.post('category',data).then(response=>{
+                    context.dispatch("getCategory")
+                    resolve(response);  
+                }).catch(err=>{
+                context.commit("serverError");
+                  reject(err)
+                })
+            })
+        },
+        deleteCat(context,data){
+            axios.defaults.headers.common['Authorization']="Bearer " + context.state.token
+            return new Promise((resolve,reject)=>{ 
+            axios.delete('/delete-cat/'+data)
             .then(response=>{
-                context.commit("getCategory",response.data)
+                context.commit("deleteCat",data)
+                resolve(response)
             })
             .catch(err=>{
                 console.log(err);
+                reject(err)
             })  
+        })
         },
         getFeeds(context){
             context.commit("isLoading",true)

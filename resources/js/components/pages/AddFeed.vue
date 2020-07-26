@@ -26,10 +26,8 @@
         <div class="field " style="margin-top:10px">
             <label>Category</label>
         <select class="ui fluid dropdown" v-model="newPost.category">
-          <option value=""> Select Category</option>
-          <option value="Wedding">Wedding</option>
-          <option value="Birthday">Birthday</option>
-          <option value="Musical Vid">Musical Vid</option>
+          <option  value=""> Select Category</option>
+          <option v-for="category in categories" :key="category.id" :value="category.name">{{category.name}}</option>
         </select>
         </div>
 
@@ -188,9 +186,16 @@ export default {
     })
   },
 
+  mounted() {
+    this.$store.dispatch('getCategory')
+  },
+
   computed: {
     progress(){
       return this.$store.getters.uploadProgress
+    },
+    categories(){
+      return this.$store.getters.category;
     }
   },
 };

@@ -10,7 +10,7 @@
             <router-link class="active" tag="span" to="/">Feeds</router-link>
           </li>
           <li>
-            <router-link tag="span" to="/">Category</router-link>
+            <router-link tag="span" :to="{name:'feeds.category'}">Category</router-link>
           </li>
           <li>
             <router-link tag="span" to="/">Settings</router-link>

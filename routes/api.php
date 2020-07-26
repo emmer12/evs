@@ -34,6 +34,9 @@ Route::group(['middleware'=>'auth:api'], function () {
     
     Route::get('/all-evs-feed','API\EvsFeedController@getall');
     Route::delete('/delete-evs-feed','API\EvsFeedController@deletePost');
+    Route::delete('/delete-cat/{id}','API\EvsFeedController@deleteCat');
+    Route::post('/category','API\EvsFeedController@createCat');
+    Route::get('/category','API\EvsFeedController@getCategory');
     
     
     Route::post('/logout','API\LoginController@logout');

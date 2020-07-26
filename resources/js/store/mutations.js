@@ -18,6 +18,10 @@
 
                 })
             },
+            deleteCat(state,data){
+                    let index=state.category.findIndex(item=>item.id == data)
+                    state.category.splice(index,1)
+            },
             uploadProgress(state,data){
                 state.uploadProgress=data
             },
@@ -26,5 +30,8 @@
             },
             getEvsFeed(state,data){
                 state.evsFeed=data
+            },
+            getCategory(state,data){
+                state.category=data
             }
     }

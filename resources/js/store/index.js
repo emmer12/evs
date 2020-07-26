@@ -17,6 +17,7 @@ export const store =new Vuex.Store({
       serverError:false,
       posts:null,
       post:null,
+      category:[],
       loading:false,
       uploadProgress:0,
       evsFeed:[]

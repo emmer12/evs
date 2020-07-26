@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div class="vid-grid">
+    <div class="vid-grid" >
       <div class="items wow slideInUp"  :data-wow-delay="(index * 0.2)+'s'" v-for="(image, index) in feeds" :key="index" @click="setIndex(index)">
         <img :src="image.thumb" width="100%" height="100%" alt="evs" />
         <div class="details">{{ image.category }}</div>
@@ -90,7 +90,7 @@ export default {
       }
     },
     feeds() {
-      return this.$store.getters.feedHome;
+      return this.$store.getters.evsFeeds;
     }
   },
 

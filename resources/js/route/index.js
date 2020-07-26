@@ -8,6 +8,7 @@ import HomePage from '../components/pages/HomePage.vue';
 import GalleryPage from '../components/pages/GalleryPage.vue';
 import EvsFeed from '../components/pages/EvsFeed.vue';
 import AddFeed from '../components/pages/AddFeed.vue';
+import Category from '../components/pages/Category.vue';
 import NewPost from '../components/partials/NewPost.vue';
 import EditPost from '../components/partials/EditPost.vue';
 import ShowPost from '../components/partials/ShowPost.vue';
@@ -97,6 +98,14 @@ export const routes = [
                 path: '/feeds/add',
                 name: 'feeds.add',
                 component:AddFeed,
+                meta: {
+                    requiresAuth: true,
+                }
+            },
+            {
+                path: '/feeds/category',
+                name: 'feeds.category',
+                component:Category,
                 meta: {
                     requiresAuth: true,
                 }

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EvsResource;
+use App\Http\Resources\Category as CategoryResource;
 
 use App\EvsFeed;
+use App\Category;
 
 class EvsFeedController extends Controller
 {
@@ -48,4 +50,35 @@ class EvsFeedController extends Controller
   //   $post=NewPost::findOrFail($id);
   //   return response()->json(['data'=>[$post]], 200);
   //  }
+
+
+  public function createCat(Request $request)
+  {
+     $validator=$request->validate([
+         'category'=>['required']
+     ]);
+
+     $post=new Category();
+
+     $post->name=$request->input('category');
+
+     $post->save();
+
+    return response()->json(['success'=>true],200);
+
+  }
+
+  public function getCategory(Request $request)
+  {
+    $category=Category::orderBy('created_at','desc')->get();
+    return CategoryResource::collection($category);
+  }
+
+
+  public function deleteCat(Request $request,$id) {
+           
+      Category::destroy($id);
+   
+   return response()->json(['success'=>$id]);
+  }
 }

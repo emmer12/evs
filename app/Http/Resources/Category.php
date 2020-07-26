@@ -17,8 +17,7 @@ class Category extends JsonResource
         //return parent::toArray($request);
         return [
             'id' => $this->id,
-            'category' => $this->category,
-            'sub_category' => subCategory::collection($this->sub_category),
+            'name' => $this->name,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             ];
