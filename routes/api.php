@@ -26,9 +26,14 @@ Route::group(['middleware'=>'auth:api'], function () {
     // Admin dashboard
     Route::get('/dashboard','API\CategoryController@subCategory')->name('subcategory.index');
     Route::post('/newpost','API\BlogController@newPost');
+    Route::post('/create-evs','API\BlogController@evsPost');
     Route::post('/updatepost','API\BlogController@updatePost');
     Route::post('/upload-file','API\BlogController@uploadFile');
     Route::delete('/deletePost','API\BlogController@deletePost');
+    
+    
+    Route::get('/all-evs-feed','API\EvsFeedController@getall');
+    Route::delete('/delete-evs-feed','API\EvsFeedController@deletePost');
     
     
     Route::post('/logout','API\LoginController@logout');

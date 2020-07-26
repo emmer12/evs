@@ -15,7 +15,7 @@
                      <button class="circular ui icon button medium">
                         <i class="icon settings"></i>
                     </button>
-                   <button class="circular ui icon button medium red" @click="deletePost(selected)">
+                   <button class="circular ui icon button medium red" @click="deletePost([selected])">
                         <i class="icon trash"></i>
                     </button>
 
@@ -195,7 +195,7 @@ export default {
 </style>                            
     
        
-<style lang="scss" scoped>
+<style lang="scss">
    i.animate{
        animation:sidePoint 1s infinite;
         font-size: 27px;

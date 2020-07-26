@@ -13,8 +13,8 @@
             },
             deletePost(state,data){
                 data.map(id=>{
-                    let index=state.posts.findIndex(item=>item.id == id)
-                    state.posts.splice(index,1)
+                    let index=state.evsFeed.findIndex(item=>item.id == id)
+                    state.evsFeed.splice(index,1)
 
                 })
             },
@@ -24,4 +24,7 @@
             loading(state,data){
                 state.loading=data
             },
+            getEvsFeed(state,data){
+                state.evsFeed=data
+            }
     }

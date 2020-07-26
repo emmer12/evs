@@ -35,10 +35,11 @@ export default {
             axios.defaults.headers.common['Authorization']='Bearer ' + context.state.token
             return new Promise((resolve,reject)=>{                
                 let formData=new FormData();
-                formData.append('display',data.fileUp);
                 formData.append('title',data.title);
-                formData.append('description',data.description);
-                axios.post('/newpost',formData)
+                formData.append('thumb',data.img);
+                formData.append('vid',data.vid);
+                formData.append('category',data.category);
+                axios.post('/create-evs',formData)
                 .then(response=>{
                    console.log("sucessss");
                     // context.commit("retrieveToken",token)
@@ -88,6 +89,20 @@ export default {
             })
          })
         },
+        getEvsFeed(context){
+            axios.defaults.headers.common['Authorization']="Bearer " + context.state.token
+            return new Promise((resolve,reject)=>{
+                axios.get('/all-evs-feed')
+                .then(response=>{
+                    context.commit("getEvsFeed",response.data.data)
+                    resolve(response.data)
+                })
+                .catch(err=>{
+                    context.commit('loading',false)
+                    console.log(err);
+            })
+         })
+        },
         getById(context,id){
             axios.defaults.headers.common['Authorization']="Bearer " + context.state.token
                 return new Promise((resolve,reject)=>{
@@ -103,9 +118,7 @@ export default {
         },
         deletePost(context,id){
             axios.defaults.headers.common['Authorization']="Bearer " + context.state.token
-            console.log(id,'sent isds');
-            
-            axios.delete('/deletePost',{
+            axios.delete('/delete-evs-feed',{
                 data:{
                     ids:id
                 }
@@ -123,7 +136,12 @@ export default {
             return new Promise((resolve,reject)=>{                
                 let formData=new FormData();
                 
-                formData.append('file',data);
+                formData.append('file',data.file);
+                formData.append('field',data.field);
+
+                console.log('====================================');
+                console.log(formData);
+                console.log('====================================');
 
                 axios.post('/upload-file',formData,{
                     onUploadProgress:progressEvent=>{

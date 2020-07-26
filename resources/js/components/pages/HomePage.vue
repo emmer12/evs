@@ -3,7 +3,7 @@
   <div>
     <div class="banner">
       <div>
-        <div class="column wow zoomIn" style="cursor:pointer" @click="setIndex(1)">
+        <div class="column wow zoomIn" style="cursor:pointer" @click="setIndex(0)">
           <i class="play icon" style="font-size:40px;line-height:40px"></i>
         </div>
         <h1 class="wow fadeIn">Wedding ani</h1>
@@ -11,17 +11,24 @@
       </div>
     </div>
 
-    <div class="vid-grid">
-      <div class="items" v-for="(image, index) in items" :key="index" @click="setIndex(index)">
-        <img :src="image.thumb" width="100%" height="100%" alt="evs" />
-        <div class="details">
-            {{ image.category }}
+    <div class="row" style="margin:50px 0px 25px 25px">
+      <div class="col-md-3" v-for="i in 5" :key="i" v-show="loading">
+        <div class="load-con">
+          <div class="img-area loads"></div>
+          <div class="leftDetails loads"></div>
         </div>
       </div>
     </div>
 
+    <div class="vid-grid">
+      <div class="items wow slideInUp"  :data-wow-delay="(index * 0.2)+'s'" v-for="(image, index) in feeds" :key="index" @click="setIndex(index)">
+        <img :src="image.thumb" width="100%" height="100%" alt="evs" />
+        <div class="details">{{ image.category }}</div>
+      </div>
+    </div>
+
     <CoolLightBox
-      :items="items"
+      :items="feeds"
       :index="index"
       loop
       autoplay
@@ -35,7 +42,6 @@
 
     <div :class="{'leaving':leaving}"></div>
     <div style="height:100px"></div>
-
   </div>
 </template>
 <style src="slick-carousel/slick/slick.css"></style>
@@ -53,121 +59,28 @@ export default {
   },
   data() {
     return {
-      leaving:false,
-      items: [
-        {
-          src: "/videos/vid1.mp4",
-          thumb: "/images/works/w1.jpg",
-          category:"Wedding"
-        },
-        {
-          src: "/videos/vid2.mp4",
-          thumb: "/images/works/w2.jpg",
-          category:"Graduation"
-        },
-        {
-          src: "/videos/vid3.mp4",
-          thumb: "/images/works/w3.jpg",
-          category:"Annivasary"
-        },
-        {
-          src: "/videos/vid4.mp4",
-          thumb: "/images/works/w4.jpg",
-          category:"Perty"
-        },
-        {
-          src: "/videos/vid5.mp4",
-          thumb: "/images/works/w5.jpg",
-          category:"Baby Shower"
-        },
-        {
-          src: "/videos/vid6.mp4",
-          thumb: "/images/works/w6.jpg",
-          category:"Birthday"
-        },
-        {
-          src: "/videos/vid1.mp4",
-          thumb: "/images/works/w7.jpg",
-          category:"Musical Video"
-        }
-      ],
+      leaving: false,
       index: null,
-      media: [
-        {
-          // For video
-          thumb: "/images/works/w1.jpg",
-          sources: [
-            {
-              src: "/videos/vid1.mp4",
-              type: "video/mp4"
-            }
-          ],
-          type: "video",
-          caption: "<h4>Monsters Inc.</h4>",
-          width: 800, // Required
-          height: 600, // Required
-          autoplay: true // Optional: Autoplay video when the lightbox opens
-        },
-        {
-          // For video
-          thumb: "/images/works/w2.jpg",
-          sources: [
-            {
-              src: "/videos/vid2.mp4",
-              type: "video/mp4"
-            }
-          ],
-          type: "video",
-          caption: "<h4>Monsters Inc.</h4>",
-          width: 800, // Required
-          height: 600, // Required
-          autoplay: false // Optional: Autoplay video when the lightbox opens
-        },
-        {
-          // For video
-          thumb: "/images/works/w3.jpg",
-          sources: [
-            {
-              src: "/videos/vid3.mp4",
-              type: "video/mp4"
-            }
-          ],
-          type: "video",
-          caption: "<h4>Monsters Inc.</h4>",
-          width: 800, // Required
-          height: 600, // Required
-          autoplay: false // Optional: Autoplay video when the lightbox opens
-        },
-        {
-          // For video
-          thumb: "/images/works/w4.jpg",
-          sources: [
-            {
-              src: "/videos/vid4.mp4",
-              type: "video/mp4"
-            }
-          ],
-          type: "video",
-          caption: "<h4>Monsters Inc.</h4>",
-          width: 800, // Required
-          height: 600, // Required
-          autoplay: false // Optional: Autoplay video when the lightbox opens
-        }
-      ]
+      loading: false
     };
   },
   methods: {
     setIndex(index) {
       this.index = index;
     },
-    handleChange(e){
-       let allVid=document.querySelectorAll('video');
-       for (let index = 0; index < allVid.length; index++) {
-            allVid[index].pause();
-       }
+    handleChange(e) {
+      let allVid = document.querySelectorAll("video");
+      for (let index = 0; index < allVid.length; index++) {
+        allVid[index].pause();
+      }
     }
   },
-  mounted() {},
+  mounted() {
+    this.loading = true;
+    this.$store.dispatch("getEvsFeed").then(() => {
+      this.loading = false;
+    });
+  },
   computed: {
     LoggedUser() {
       if (window.loggedUser) {
@@ -175,14 +88,17 @@ export default {
       } else {
         return false;
       }
+    },
+    feeds() {
+      return this.$store.getters.feedHome;
     }
   },
 
-  beforeRouteLeave (to, from, next) {
-    this.leaving=true
-    setTimeout(function () {
-        next() 
-      },1000)
+  beforeRouteLeave(to, from, next) {
+    this.leaving = true;
+    setTimeout(function() {
+      next();
+    }, 1000);
   }
 };
 </script>
@@ -244,122 +160,115 @@ $secondary: rgb(86, 79, 204);
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
-  margin-top: 50px;
+  margin-top: 25px;
   margin-left: 25px;
   margin-right: 25px;
   & .items {
-    background:  linear-gradient(rgba(0,0,0,0.5),rgba(255,255,255,1));
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 1));
     height: 200px;
     cursor: pointer;
-    position:relative;
-    transition:1s ease;
-    & .details{
-        //    border-radius:5px;
-            position:absolute;
-            height: 100%;
-            width:100%;
-            top:0;
-            background:  linear-gradient(rgba(0,0,0,0.5),rgba(255,255,255,0.1));
-            color:rgba(255, 255, 255, 0.7);
-            padding:10px;
-            font-size:16px;
-            font-weight:700;
-        } 
-    &:hover{
-        & .details{
-            position:absolute;
-            height: 100%;
-            width:100%;
-            top:0;
-            background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,200,0.5));
-            color:rgba(255, 255, 255, 0.7);
-            padding:10px;
-            font-size:16px;
-            font-weight:700;
-
-        } 
+    position: relative;
+    transition: 1s ease;
+    & .details {
+      //    border-radius:5px;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      top: 0;
+      background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(255, 255, 255, 0.1));
+      color: rgba(255, 255, 255, 0.7);
+      padding: 10px;
+      font-size: 16px;
+      font-weight: 700;
     }
-
+    &:hover {
+      & .details {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        top: 0;
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 200, 0.5));
+        color: rgba(255, 255, 255, 0.7);
+        padding: 10px;
+        font-size: 16px;
+        font-weight: 700;
+      }
+    }
   }
 }
 
 @keyframes leftR {
-  0%{
-    transform: translate3d(-100%,0px,0px);
+  0% {
+    transform: translate3d(-100%, 0px, 0px);
   }
-  100%{
-    transform: translate3d(0%,0px,100px);
+  100% {
+    transform: translate3d(0%, 0px, 100px);
   }
 }
-
 
 @keyframes rightR {
-  0%{
-    transform: translate3d(0%,0px,0px);
+  0% {
+    transform: translate3d(0%, 0px, 0px);
   }
-  90%{
-    opacity:1
+  90% {
+    opacity: 1;
   }
-  100%{
-    transform: translate3d(-100%,0px,100px);
-    opacity:0
+  100% {
+    transform: translate3d(-100%, 0px, 100px);
+    opacity: 0;
   }
 }
 
-
-
-.leaving{
-  &::before{
-    animation-name:leftR;
-    animation-duration:0.7s;
-    top:0px;
+.leaving {
+  &::before {
+    animation-name: leftR;
+    animation-duration: 0.7s;
+    top: 0px;
   }
-   &::after{
-    animation-name:leftR;
-    animation-duration:1s;
+  &::after {
+    animation-name: leftR;
+    animation-duration: 1s;
     bottom: 0;
   }
-  &::before,&::after{
+  &::before,
+  &::after {
     content: "";
-    height:50%;
-    width:100%;
-    position:fixed;
-    left:0px;
-    transition-property: opacity,translate;
+    height: 50%;
+    width: 100%;
+    position: fixed;
+    left: 0px;
+    transition-property: opacity, translate;
     transition-timing-function: ease-in-out;
     background: #444;
     z-index: 9999;
-
   }
-
 }
 
-.entring{
-  &::before{
-    animation-name:rightR ;
-    animation-duration:0.7s;
-    top:0px;
+.entring {
+  &::before {
+    animation-name: rightR;
+    animation-duration: 0.7s;
+    top: 0px;
   }
-   &::after{
-    animation-name:rightR ;
-    animation-duration:1s;
+  &::after {
+    animation-name: rightR;
+    animation-duration: 1s;
     bottom: 0;
   }
-  &::before,&::after{
+  &::before,
+  &::after {
     content: "";
-    height:50%;
-    width:100%;
-    position:fixed;
-    left:0px;
-    transition-property: opacity,translate;
+    height: 50%;
+    width: 100%;
+    position: fixed;
+    left: 0px;
+    transition-property: opacity, translate;
     transition-timing-function: ease-in-out;
     background: #444;
     transform-origin: left;
-    z-index:9999
+    z-index: 9999;
   }
-
 }
-
 
 @media screen and (max-width: 640px) {
   .heading h1 {

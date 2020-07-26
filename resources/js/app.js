@@ -51,7 +51,6 @@ const toastConfig = {
 Vue.use(CxltToastr, toastConfig)
 Vue.use(VueRouter);
 
-
 extend('required', {
     ...required,
     message: 'This field is required'

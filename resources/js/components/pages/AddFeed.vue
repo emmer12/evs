@@ -1,19 +1,6 @@
 <template>
-  <div class="post-container">
-    <div class="action-con">
-      <div class="right">
-        <router-link :to="{name:'dashboard'}">
-          <button class="circular ui icon button small">
-            <i class="icon arrow left"></i>
-          </button>
-        </router-link>
-
-        <button class="circular ui icon button small green" @click="processPost">
-          <i class="icon save"></i> Save
-        </button>
-      </div>
-    </div>
-
+  <div class="feed-container">
+    
     <div class="ui elevate">
       <form
         class="ui form"
@@ -36,15 +23,6 @@
             <span class="error" style="color:#9f3a38">{{errors[0]}}</span>
           </div>
         </validation-provider>
-
-        <!-- <validation-provider rules="required" v-slot="{ errors }" >
-                                    <div class="field" :class="{error:errors[0],success:errors[0]}">
-                                        <label>Description</label>
-                                        <ckeditor height="200px" :editor="editor" v-model="newPost.description" :config="editorConfig"></ckeditor>
-                                        <span class="error" style="color:#9f3a38">{{errors[0]}}</span>
-                                    </div>
-        </validation-provider>-->
-        
         <div class="field " style="margin-top:10px">
             <label>Category</label>
         <select class="ui fluid dropdown" v-model="newPost.category">
@@ -83,7 +61,7 @@
           <label for="video">
             <div class="ui btn">
               <img src="/images/icons/vid-icon.png" v-if="!newPost.vid" width="150px" height="150px" alt />
-              <video src="" ref="vid" width="150px" ></video>
+              <video src="" ref="vid" width="150px" height="150px" :class="{'hide':!newPost.vid}"></video>
             </div>
           </label>
           <input
@@ -110,6 +88,7 @@
 import { ValidationProvider } from "vee-validate";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { EventBus } from '../../event-bus'
+
 export default {
   components: {
     ValidationProvider
@@ -144,7 +123,6 @@ export default {
       };
       return false;
     },
-    
     processPost: function() {
       this.$Progress.start();
       this.loading = true;
@@ -160,7 +138,7 @@ export default {
             title: "Post Created",
             message: "post successfully created "
           });
-          this.$router.push({ name: "dashboard" });
+          this.$router.push({ name: "feeds" });
         })
         .catch(err => {
           this.loading = false;
@@ -173,7 +151,6 @@ export default {
           });
         });
     },
-
     processForm: function(e) {
       if (e.target.name==='thumb') {
         this.proImg=true
@@ -205,12 +182,11 @@ export default {
       this.$emit("backList");
     }
   },
-  created () {
+   created () {
     EventBus.$on('save-evs-feed',()=>{
-      this.processPost
+      this.processPost()
     })
   },
-
 
   computed: {
     progress(){
@@ -221,6 +197,9 @@ export default {
 </script>
 
 <style lang="scss">
+.feed-container{
+    margin:0px 40px;
+}
 .custum-upload-manager{
   border:1px dashed gray
 }
@@ -253,5 +232,15 @@ export default {
     right: 5%;
     top: 3%;
   }
+}
+.hide{
+    display:none
+}
+
+
+@media (max-width: 640px) {
+  .feed-container{
+    margin:0px 5px;
+}
 }
 </style>

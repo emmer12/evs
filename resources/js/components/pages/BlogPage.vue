@@ -139,14 +139,14 @@ export default {
 }
 
 .load-con{
-  background: #888;
+  background: #ddd;
     height: 260px;
     width: 100%;
     position: relative;
 
    & .img-area{
          height: 180px;
-        background: #999;
+        background: #cdcdcd;
         padding: 10px;
         margin: 10px;
         border-radius: 3px;
@@ -166,7 +166,18 @@ export default {
     border-radius: 3px;
     overflow: hidden;
     top:14px
-
+   }
+   & .leftDetails{
+      height: 26px;
+    background:#cdcdcd;
+    padding: 10px;
+    margin: 10px;
+    width: 30%;
+    position: relative;
+    left:5px;
+    border-radius: 3px;
+    overflow: hidden;
+    top:14px
    }
 
 

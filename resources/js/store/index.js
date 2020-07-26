@@ -18,7 +18,8 @@ export const store =new Vuex.Store({
       posts:null,
       post:null,
       loading:false,
-      uploadProgress:0
+      uploadProgress:0,
+      evsFeed:[]
     },
     mutations,
     actions,

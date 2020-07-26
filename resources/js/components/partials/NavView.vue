@@ -4,7 +4,7 @@
       <div class="container">
         <div class="bottom-nav">
           <div class="logo">
-            <router-link to="/">
+            <router-link tag="div" to="/">
               <h1>EVS</h1>
             </router-link>
           </div>
@@ -28,16 +28,18 @@
               <li>
                 <router-link :class="{'active':$route.name==='blog'}" to="/blog">Blog</router-link>
               </li>
-              <li class="space" style="width:200px"></li>
-              <!-- <li v-if="loggedIn" @click="dropmenuChange"><img  class="logged-avata" src="/images/user.png" width="50px" height="50px" alt="img"> <i class="angle down icon"></i></li> -->
+              
+              <li v-if="loggedIn" @click="dropmenuChange">
+                 <i class="user circle outline icon" style="color:grey;font-size:20px"></i> <i style="color:grey" class="angle down icon"></i>
+              </li>
             </ul>
           </div>
         </div>
 
-        <div class="logged-avata-mobile" v-if="loggedIn" @click="dropmenuChange">
+        <!-- <div class="logged-avata-mobile" v-if="loggedIn" @click="dropmenuChange">
           <img class="logged-avata" src="/images/user.png" width="50px" height="50px" alt="img" />
           <i class="angle down icon"></i>
-        </div>
+        </div> -->
         <div class="dropdown" :class="{added:dropmenu}">
           <ul>
             <li>
@@ -50,6 +52,8 @@
                 <i class="sign out alternate icon"></i> Logout
               </router-link>
             </li>
+
+            
           </ul>
         </div>
         <div class="bar" :class="{added:sidebar}" @click="openSidebar">
@@ -57,8 +61,11 @@
           <span></span>
         </div>
         <div class="sidebar" :class="{added:sidebar}">
-          <div class="s-header"></div>
+          <!-- <div class="s-header"></div> -->
           <ul class="ul">
+            <li>
+              <router-link to="/">Home</router-link>
+            </li>
             <li>
               <router-link to="/service">Service</router-link>
             </li>
@@ -68,8 +75,15 @@
             <li>
               <router-link to="/about">About</router-link>
             </li>
-            <li>
-              <router-link to="/blog">Blog</router-link>
+            <li  v-if="loggedIn">
+              <router-link to="/dashboard">
+                <i class="user circle outline icon"></i> Dashboard
+              </router-link>
+            </li>
+            <li  v-if="loggedIn">
+              <router-link to="/logout">
+                <i class="sign out alternate icon"></i> Logout
+              </router-link>
             </li>
             
           </ul>
@@ -298,7 +312,7 @@ i.instagram {
         position: absolute;
         left: 0px;
         top: 80px;
-        background: #1f2037;
+        background: #ffff;
         width: 0vw;
         overflow: hidden;
         transition: 0.3s ease-in-out;
@@ -316,16 +330,15 @@ i.instagram {
         }
         & .ul li{
             list-style: none;
-            
+            transform: translateX(-200px);            
             & a{
                 display: block;
                 padding: 10px;
-                background: #333b54;
                 margin: 1px;
                 font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
                 font-weight: 700;
-                transition: 0.3s ease;
-                color: #ECEDEC;
+                color: #3b5998;
+                background: #f6f9f9;
                 &:hover{
                     background: hsl(240, 71%, 8%);
                     color: rgb(174, 188, 226);
@@ -335,8 +348,31 @@ i.instagram {
         }
 
         &.added{
-            width: 80vw;
-            }
+          & .ul li{
+            transform: translateX(0px);
+             &:nth-child(1){
+               transition:0.3s 0.2s
+             }
+              &:nth-child(2){
+               transition:0.3s 0.4s
+             }
+              &:nth-child(3){
+               transition:0.3s 0.6s
+             }
+               &:nth-child(4){
+               transition:0.3s 0.8s
+             }
+               &:nth-child(5){
+               transition:0.3s 1s
+             }
+              &:nth-child(6){
+               transition:0.3s 1.2s
+             }
+          }
+          
+            width: 70vw;
+          }
+       
     }
     .s-footer-con{
         position:relative;
@@ -445,12 +481,17 @@ i.instagram {
     @media (max-width: 640px) {
         .logo{
             text-align: center;
-            width:100%;
-            position:absolute;
+            // width:100%;
+            position: relative;
             padding:0px;
-            margin:0px;
-            left:0px;
+            // margin:0px;
+            left:50%;
+            transform: translateX(50%);
+            & div{
+              text-align:center
+            }
             & h1{
+              color:#3b5998;
                 // color:#333;
                 line-height:100px;
                 font-size:35px;

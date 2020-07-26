@@ -16,5 +16,11 @@ export default {
     }, 
     uploadProgress(state){
         return state.uploadProgress
+    },
+    evsFeeds(state){
+        return state.evsFeed
+    },
+    feedHome(state){
+        return state.evsFeed
     }
 }

@@ -8,9 +8,29 @@ use App\Http\Resources\PostResource;
 use App\Http\Resources\singlePost as singlePostResource;
 
 use App\NewPost;
+use App\EvsFeed;
 
 class BlogController extends Controller
 {
+public function evsPost(Request $request)
+{
+  $validator=$request->validate([
+    'title' => ['required', 'string'],
+    'category' => ['required', 'string'],
+]);
+
+$post= new EvsFeed();
+$post->title=$request->input('title');
+$post->category=$request->input('category');
+$post->cover=$request->input('thumb');
+$post->video=$request->input('vid');
+
+$post->save();
+
+return response()->json(['success'=>true],200);
+}
+    
+  
     public function newPost(Request $request)
     {
         $validator=$request->validate([
@@ -151,11 +171,11 @@ class BlogController extends Controller
       // upload image
       $path=$request->file('file')->storeAs("public/uploads/images",$fileNametoStore);
       
+      $host= env('APP_URL',null).'/storage/uploads/images/'.$fileNametoStore;
+      return response()->json(['filepath'=>$host],200);
     }
 
-    $host= env('APP_URL',null).'/storage/uploads/images/'.$fileNametoStore;
 
-       return response()->json(['filepath'=>$host],200);
    }
 
 }
