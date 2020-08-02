@@ -14,21 +14,21 @@
                 <router-link :class="{'active':$route.name==='home'}" to="/">Home</router-link>
               </li>
               <li>
-                <router-link :class="{'active':$route.name==='service'}" to="/service">Service</router-link>
+                <router-link :class="{'active':$route.params.category==='Music'}" :to="{name:'category',params:{category:'Music'}}">Music Video<i class="fas fa-file-video    "></i></router-link>
               </li>
               <li>
-                <router-link :class="{'active':$route.name==='contact'}" to="/contact">Contact</router-link>
+                <router-link :class="{'active':$route.params.category==='Wedding'}" :to="{name:'category',params:{category:'Wedding'}}">Wedding</router-link>
               </li>
               <li>
-                <router-link :class="{'active':$route.name==='about'}" to="/about">About</router-link>
+                <router-link :class="{'active':$route.params.category==='Film'}" :to="{name:'category',params:{category:'Film'}}">Film</router-link>
               </li>
-              <li>
-                <router-link to="/gallery">Gallery</router-link>
+                  <li>
+                <router-link :class="{'active':$route.params.category==='Commercial'}" :to="{name:'category',params:{category:'Commercial'}}">Commercial/Extra</router-link>
               </li>
-              <li>
-                <router-link :class="{'active':$route.name==='blog'}" to="/blog">Blog</router-link>
+                 <li>
+                <router-link :class="{'active':$route.name==='contact'}" :to="{name:'contact'}">Contact</router-link>
               </li>
-              
+            
               <li v-if="loggedIn" @click="dropmenuChange">
                  <i class="user circle outline icon" style="color:grey;font-size:20px"></i> <i style="color:grey" class="angle down icon"></i>
               </li>
@@ -63,18 +63,24 @@
         <div class="sidebar" :class="{added:sidebar}">
           <!-- <div class="s-header"></div> -->
           <ul class="ul">
-            <li>
-              <router-link to="/">Home</router-link>
-            </li>
-            <li>
-              <router-link to="/service">Service</router-link>
-            </li>
-            <li>
-              <router-link to="/contact">Contact</router-link>
-            </li>
-            <li>
-              <router-link to="/about">About</router-link>
-            </li>
+             <li>
+                <router-link :class="{'active':$route.name==='home'}" to="/">Home</router-link>
+              </li>
+              <li>
+                <router-link :class="{'active':$route.params.category==='service'}" :to="{name:'category',params:{category:'Music'}}">Music Video<i class="fas fa-file-video    "></i></router-link>
+              </li>
+              <li>
+                <router-link :class="{'active':$route.params.category==='Wedding'}" :to="{name:'category',params:{category:'Wedding'}}">Wedding</router-link>
+              </li>
+              <li>
+                <router-link :class="{'active':$route.params.category==='Film'}" :to="{name:'category',params:{category:'Film'}}">Film</router-link>
+              </li>
+                  <li>
+                <router-link :class="{'active':$route.params.categor==='Commercial'}" :to="{name:'category',params:{category:'Commercial'}}">Commercial/Extra</router-link>
+              </li>
+              <li>
+                <router-link :class="{'active':$route.name==='contact'}" :to="{name:'contact'}">Contact</router-link>
+              </li>
             <li  v-if="loggedIn">
               <router-link to="/dashboard">
                 <i class="user circle outline icon"></i> Dashboard

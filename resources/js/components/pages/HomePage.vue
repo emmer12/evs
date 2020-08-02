@@ -168,9 +168,8 @@ $secondary: rgb(86, 79, 204);
     height: 200px;
     cursor: pointer;
     position: relative;
-    transition: 1s ease;
     & .details {
-      //    border-radius:5px;
+    transition: 1s;
       position: absolute;
       height: 100%;
       width: 100%;
@@ -181,17 +180,14 @@ $secondary: rgb(86, 79, 204);
       font-size: 16px;
       font-weight: 700;
     }
-    &:hover {
+    &:hover > {
       & .details {
-        position: absolute;
-        height: 100%;
-        width: 100%;
-        top: 0;
-        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 200, 0.5));
-        color: rgba(255, 255, 255, 0.7);
-        padding: 10px;
-        font-size: 16px;
-        font-weight: 700;
+        background:  rgba(0, 0, 200, 0.5);
+        color:#fff;
+        transform-origin: bottom left;
+        animation:zoomIn 0.3s
+
+
       }
     }
   }
@@ -199,7 +195,8 @@ $secondary: rgb(86, 79, 204);
 
 @keyframes leftR {
   0% {
-    transform: translate3d(-100%, 0px, 0px);
+    transform: translate3d(-100%, 0px, 0
+    px);
   }
   100% {
     transform: translate3d(0%, 0px, 100px);

@@ -22,6 +22,10 @@ Route::get('/allpost','API\BlogController@allPost');
 Route::get('/getpost/{id}','API\BlogController@getPost');
 
 
+
+
+
+Route::get('/feed-by-cat/{category}','API\EvsFeedController@getByCat');
 Route::group(['middleware'=>'auth:api'], function () {
     // Admin dashboard
     Route::get('/dashboard','API\CategoryController@subCategory')->name('subcategory.index');

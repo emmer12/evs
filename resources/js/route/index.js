@@ -9,6 +9,7 @@ import GalleryPage from '../components/pages/GalleryPage.vue';
 import EvsFeed from '../components/pages/EvsFeed.vue';
 import AddFeed from '../components/pages/AddFeed.vue';
 import Category from '../components/pages/Category.vue';
+import FeedCategory from '../components/pages/FeedCategory.vue';
 import NewPost from '../components/partials/NewPost.vue';
 import EditPost from '../components/partials/EditPost.vue';
 import ShowPost from '../components/partials/ShowPost.vue';
@@ -35,9 +36,9 @@ export const routes = [
         }
     },
     {
-        path: '/about',
-        name: 'about',
-        component: AboutPage,
+        path: '/category/:category',
+        name: 'category',
+        component: FeedCategory,
         meta: {
             title: "::About::",
         }
@@ -49,11 +50,6 @@ export const routes = [
         meta: {
             title: "::Contact Us::",
         }
-    },
-    {
-        path: '/blog',
-        name: 'blog',
-        component: BlogPage
     },
     {
         path: '/blog/:slug',

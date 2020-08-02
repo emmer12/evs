@@ -116,6 +116,18 @@ export default {
          })
         })
         },
+        getByCat(context,category){
+                return new Promise((resolve,reject)=>{
+                axios.get('/feed-by-cat/' + category)
+                .then(response=>{
+                    context.commit("getByCat",response.data.data)
+                    resolve(response.data.data)
+                })
+                .catch(err=>{
+                    console.log(err);
+         })
+        })
+        },
         deletePost(context,id){
             axios.defaults.headers.common['Authorization']="Bearer " + context.state.token
             axios.delete('/delete-evs-feed',{

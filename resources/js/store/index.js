@@ -20,7 +20,8 @@ export const store =new Vuex.Store({
       category:[],
       loading:false,
       uploadProgress:0,
-      evsFeed:[]
+      evsFeed:[],
+      catFeed:[]
     },
     mutations,
     actions,

@@ -11,6 +11,9 @@
             getById(state,data){
                 state.post=data;
             },
+            getByCat(state,data){
+                state.catFeed=data;
+            },
             deletePost(state,data){
                 data.map(id=>{
                     let index=state.evsFeed.findIndex(item=>item.id == id)

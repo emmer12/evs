@@ -20,6 +20,9 @@ export default {
     evsFeeds(state){
         return state.evsFeed
     },
+    evsCatFeeds(state){
+        return state.catFeed
+    },
     category(state){
         return state.category
     }

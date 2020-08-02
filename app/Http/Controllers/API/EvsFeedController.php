@@ -74,6 +74,13 @@ class EvsFeedController extends Controller
     return CategoryResource::collection($category);
   }
 
+  public function getByCat(Request $request,$category)
+  {
+    $post=EvsFeed::where("category",$category)->get();
+    return EvsResource::collection($post);
+  }
+
+
 
   public function deleteCat(Request $request,$id) {
            
