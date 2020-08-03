@@ -29,6 +29,7 @@
     
     <div style="height:100px"></div>
     <div :class="{'leaving':leaving}"></div>
+    <div :class="{'entring':entring}" ></div>
 
   </div>
 <!-- <style src="slick-carousel/slick/slick.css"></style> -->
@@ -47,7 +48,8 @@ export default {
     return {
       leaving: false,
       index: null,
-      loading: false
+      loading: false,
+      entring:false
     };
   },
   methods: {
@@ -75,7 +77,13 @@ export default {
       return this.$store.getters.evsCatFeeds;
     }
   },
-
+  created () {
+            this.entring = true;
+            let tis=this
+            setTimeout(function(){
+            tis.entring=false
+            },950)
+  },
   watch: {
     $route(){
       this.getByCat()

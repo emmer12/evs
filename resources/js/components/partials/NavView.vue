@@ -1,5 +1,5 @@
 <template>
-  <div class style="background:white">
+  <div class style="background:white" :class="{'shadow':$route.name!=='home' }">
     <div class="bottom-nav-con" :class="{added:scrollPosition > 30}">
       <div class="container">
         <div class="bottom-nav">
@@ -60,6 +60,15 @@
           <span></span>
           <span></span>
         </div>
+
+
+
+
+            <div class="overlay" :class="{added:sidebar}" @click="openSidebar"></div>
+
+
+
+
         <div class="sidebar" :class="{added:sidebar}">
           <!-- <div class="s-header"></div> -->
           <ul class="ul">
@@ -416,7 +425,7 @@ i.instagram {
             right: 20px;
             top: 21px;
             display: none;
-            
+            z-index: 998;
           &.added{
              & span:nth-child(1){
             width: 30px;
@@ -482,7 +491,21 @@ i.instagram {
         }
     }
     
-    
+    .overlay{
+      position:fixed;
+      background:rgba(255,255, 255,0.7);
+      left:0px;
+      top:0px;
+      height:100vh;
+      width:100%;
+      z-index:997;
+      opacity:0;
+      transition:0.2s ease-in-out;
+      &.added{
+        opacity:1;
+        filter:blur('200px')
+      }
+    }
 
     @media (max-width: 640px) {
         .logo{

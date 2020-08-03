@@ -72,10 +72,12 @@
                    </ul>
                 </div>
             </div>
-            <div class="pre-loader"></div>
+            <!-- <div class="pre-loader"></div> -->
+
         </div>
         </div>
         <br><br>
+            <div :class="{'entring':entring}" ></div>
     </div> 
 
 </template>
@@ -88,9 +90,16 @@
         },
         data(){ 
             return {
-                
+                entring:false,
             } 
         }, 
+        created () {
+            this.entring = true;
+            let tis=this
+            setTimeout(function(){
+            tis.entring=false
+            },950)
+        },
         methods:{
 
         },
