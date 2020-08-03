@@ -272,7 +272,7 @@ i.instagram {
             padding: 10px 15px;
             &:hover{
                 text-decoration: none;
-                color:  rgb(16, 32, 102);
+                color:  #4283c4;
             }
             &::after{
                 content: "";

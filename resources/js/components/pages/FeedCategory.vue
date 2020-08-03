@@ -3,7 +3,7 @@
         <div class="heading wow bounceInLeft">
             <h1> {{$route.params.category}}</h1>
         </div>
-      <div class="row" style="margin:50px 0px 25px 25px">
+      <div class="row" style="margin:10px 0px 25px 25px">
       <div class="col-md-3" v-for="i in 5" :key="i" v-show="loading">
         <div class="load-con">
           <div class="img-area loads"></div>

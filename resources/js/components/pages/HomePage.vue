@@ -98,7 +98,7 @@ export default {
     this.leaving = true;
     setTimeout(function() {
       next();
-    }, 1000);
+    },1000);
   }
 };
 </script>
@@ -195,8 +195,7 @@ $secondary: rgb(86, 79, 204);
 
 @keyframes leftR {
   0% {
-    transform: translate3d(-100%, 0px, 0
-    px);
+    transform: translate3d(-100%, 0px, 0px);
   }
   100% {
     transform: translate3d(0%, 0px, 100px);

@@ -18,7 +18,7 @@
               <div class="scroll-top" v-if="showSt" ref="scroll-top" @click="scrollTop">
                   <i class="icon angle double up"></i>
               </div>
-        <footer-view v-if="!['home','feeds','feeds.category'].includes($route.name)"></footer-view>
+        <!-- <footer-view v-if="!['home','feeds','feeds.category'].includes($route.name)"></footer-view> -->
 
 <!-- $route.name!=='home' && $route.name!=='feeds' -->
     </div>
