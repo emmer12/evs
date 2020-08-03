@@ -102,8 +102,7 @@ export default {
   }
 };
 </script>
-// <style src="slick-carousel/slick/slick.css"></style>
-<style src="slick-carousel/slick/slick-theme.css"></style>
+
 
 <style lang="scss" >
 @import url("https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap");
