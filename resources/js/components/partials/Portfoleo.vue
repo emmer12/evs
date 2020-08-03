@@ -71,13 +71,13 @@
 import isotope from 'vueisotope';
 import layout from 'isotope-layout';
 import imagesLoaded from 'vue-images-loaded'
-import LightBox from 'vue-image-lightbox'
-import 'vue-image-lightbox/dist/vue-image-lightbox.min.css';
+// import LightBox from 'vue-image-lightbox'
+// import 'vue-image-lightbox/dist/vue-image-lightbox.min.css';
 var count=0;
 export default {
   components:{
     isotope,
-    LightBox
+    // LightBox
         },
   directives: {
     imagesLoaded,

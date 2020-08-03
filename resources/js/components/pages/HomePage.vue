@@ -43,8 +43,8 @@
     <div :class="{'leaving':leaving}"></div>
     <div style="height:100px"></div>
   </div>
+<!-- <style src="slick-carousel/slick/slick.css"></style> -->
 </template>
-<style src="slick-carousel/slick/slick.css"></style>
 
 <script>
 // import LightBox from 'vue-it-bigger'
